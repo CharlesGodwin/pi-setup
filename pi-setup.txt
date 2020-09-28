@@ -1,0 +1,36 @@
+
+sudo apt -y install dos2unix zip mailutils ca-certificates
+
+sudo apt -y install postfix  libsasl2-2  libsasl2-modules
+
+install postfix for email
+
+https://easyengine.io/tutorials/linux/ubuntu-postfix-gmail-smtp
+
+
+cat /etc/ssl/certs/thawte_Primary_Root_CA.pem | sudo tee -a /etc/postfix/cacert.pem
+
+sudo nano /etc/postfix/main.cf
+sudo nano /etc/postfix/sasl_passwd
+sudo chmod 400 /etc/postfix/sasl_passwd
+sudo postmap /etc/postfix/sasl_passwd
+sudo systemctl restart postfix
+echo "Test mail from postfix" | mail -s "Test Postfix" charles@godwin.ca
+
+https://inkplant.com/code/linux-email-forwarding
+
+ sudo nano  .forward
+charles@godwin.ca
+
+ google password 
+
+
+ 2020-03-20 14:11:23
+
+nano ~/.bash_aliases
+alias ll='ls -l --color=no'
+
+
+https://raspinotes.wordpress.com/2019/03/10/send-email-from-raspberrypi-with-exim4/
+
+https://hub.docker.com/_/nextcloud

@@ -1,0 +1,73 @@
+Pi 4 4G 500GB SSD
+
+OS Lite
+requirement pip3 gpiozero
+zip 
+dos2unix
+docker
+docker-compose
+git
+mail client
+
+nginx
+portainer
+nextcloud
+mariadb
+influxdb
+telegraf
+chronograf
+
+Pi 4 2G 256GB SSD
+OS Lite
+requirement pip3 gpiozero
+zip 
+dos2unix
+docker
+docker-compose
+mail client
+
+remote.it
+
+nextcloud 
+https://hub.docker.com/_/nextcloud
+docker pull nextcloud
+
+grafana
+https://hub.docker.com/r/grafana/grafana
+docker pull grafana/grafana
+
+portainer
+https://hub.docker.com/r/portainer/portainer
+docker pull portainer/portainer
+
+mariadb
+https://hub.docker.com/_/mariadb
+docker pull mariadb
+
+influxdb
+https://hub.docker.com/_/influxdb
+docker pull influxdb
+
+telegraf
+https://hub.docker.com/_/telegraf
+docker pull telegraf
+
+chronograf
+https://hub.docker.com/_/chronograf
+docker pull chronograf
+
+nginx
+https://hub.docker.com/_/nginx
+docker pull nginx
+
+phpmyadmin
+https://hub.docker.com/_/phpmyadmin
+docker pull phpmyadmin
+
+pihole
+https://hub.docker.com/r/pihole/pihole
+docker pull pihole/pihole
+
+Guacamole
+https://hub.docker.com/r/guacamole/guacamole
+docker pul guacamole/guacamole

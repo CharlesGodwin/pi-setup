@@ -1,0 +1,11 @@
+docker pull guacamole/guacamole
+docker pull chronograf
+docker pull grafana/grafana
+docker pull influxdb
+docker pull mariadb
+docker pull nextcloud
+docker pull nginx
+docker pull phpmyadmin
+docker pull pihole/pihole
+docker pull portainer/portainer
+docker pull telegraf

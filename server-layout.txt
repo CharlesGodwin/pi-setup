@@ -1,0 +1,52 @@
+
+install docker and docker-compose
+
+
+hosts
+ControlPanel.Home	192.168.1.1
+SPA112	            192.168.1.2
+NPI8EE4F7	        192.168.1.3
+RT-AC5300-FA00  	192.168.1.5
+basement        	192.168.1.8 
+WDMyCloud       	192.168.1.9
+basement        	192.168.1.11	
+HP839C21        	192.168.1.19
+piserver        	192.168.1.20
+piserver        	192.168.1.21
+godwin.ca           192.168.1.11
+octopi              192.168.1.35
+	
+
+
+all following wil be containers except as noted
+
+dnsmasq to handle internal DNS resolution
+ngnx reverse proxy
+postfix mail relay
+
+sshd
+
+
+pihole https://codeopolis.com/posts/running-pi-hole-in-docker-is-remarkably-easy/
+
+docker run -d --name=pihole -e TZ=America/New_York -e WEBPASSWORD=God91550 -e SERVERIP=192.168.1.11 -v pihole:/etc/pihole -v dnsmasq:/etc/dnsmasq.d -p 8001:80 -p 53:53/tcp -p 53:53/udp --restart=unless-stopped pihole/pihole
+
+docker run \
+-d \
+--name=pihole \
+-e TZ=America/New_York \
+-e WEBPASSWORD=God91550 \
+-e SERVERIP=192.168.1.11 \
+-v pihole:/etc/pihole \
+-v dnsmasq:/etc/dnsmasq.d \
+-p 8001:80 \
+-p 53:53/tcp \
+-p 53:53/udp \
+--restart=unless-stopped \
+pihole/pihole
+
+
+exim4 is installed with mail clients
+udo dpkg-reconfigure exim4-config
+
+
