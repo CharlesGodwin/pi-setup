@@ -9,28 +9,14 @@ docker-compose
 git
 mail client
 
-nginx
-portainer
-nextcloud
-mariadb
-influxdb
-telegraf
-chronograf
-
-Pi 4 2G 256GB SSD
-OS Lite
-requirement pip3 gpiozero
-zip 
-dos2unix
-docker
-docker-compose
-mail client
-
-remote.it
-
 nextcloud 
 https://hub.docker.com/_/nextcloud
 docker pull nextcloud
+docker volume nextcloud_main /var/www/html Main folder, needed for updating
+docker volume nextcloud_apps /var/www/html/custom_apps installed / modified apps
+docker volume nextcloud_config /var/www/html/config local configuration
+docker volume nextcloud_data /var/www/html/data the actual data of your Nextcloud
+docker volume nextcloud_theme /var/www/html/themes/<YOU_CUSTOM_THEME> theming/branding
 
 grafana
 https://hub.docker.com/r/grafana/grafana
@@ -70,4 +56,12 @@ docker pull pihole/pihole
 
 Guacamole
 https://hub.docker.com/r/guacamole/guacamole
-docker pul guacamole/guacamole
+docker pull guacamole/guacamole
+
+Mosquitto
+https://hub.docker.com/_/eclipse-mosquitto
+docker pull eclipse-mosquitto
+
+node-red
+https://hub.docker.com/r/nodered/node-red
+docker pull nodered/node-red

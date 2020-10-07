@@ -1,12 +1,6 @@
-# do these first six steps manually
-#sudo raspi-config
-#sudo apt update
-#sudo apt upgrade -y
-#sudo apt install -y git
-#git https://github.com/CharlesGodwin/pi-setup.git ~/pi-setup
-#cd ~/pi-setup
+cat startup.txt
 cd ~/pi-setup
-
+chmod +x *.sh
 sudo apt install -y python3 python3-pip zip dos2unix docker docker-compose mailtools exim4
 #
 sudo pip3 install -r requirements.txt
