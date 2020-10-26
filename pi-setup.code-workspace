@@ -4,5 +4,10 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.autoGuessEncoding": true,
+		"files.eol": "\n",
+		"files.insertFinalNewline": true,
+		"files.trimTrailingWhitespace": true
+	}
 }

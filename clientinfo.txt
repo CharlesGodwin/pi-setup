@@ -1,4 +1,0 @@
-# Copy following lines  to end of /etc/exim4/passwd.client
-gmail-smtp.l.google.com:godch01@gmail.com:qtymyczwvhgmitzs
-*.google.com:godch01@gmail.com:qtymyczwvhgmitzs
-smtp.gmail.com:godch01@gmail.com:qtymyczwvhgmitzs

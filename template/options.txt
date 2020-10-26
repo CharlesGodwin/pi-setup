@@ -1,0 +1,8 @@
+HOSTNAME=
+LOCALE="en_US.UTF-8"
+TIMEZONE=
+INITIAL_PACKAGES="git python3-pip zip"
+PYTHON_MODULES=
+# the following are opti9ona;
+GMAIL=
+GMAIL_AUTH=
