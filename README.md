@@ -19,9 +19,10 @@ The files will do the following:
    4. update software
    5. Installs initial packages
    6. Installs initial python3 packages
-   7. change hostname
-   8. reboot
-3. gmail-setup.sh
+   7. Run an optional extra setup script
+   8. change hostname
+   9. reboot
+3. gmail-setup.sh __optional__
    1. Install exim4 mailer and mail client
    2.  Initializes exim4 mailer for gmail
    3.  Assign forwarding of emails for root and pi to gmail
@@ -40,9 +41,10 @@ Follow these steps to a simple new image. I say simple, but it is not quick, as 
    4. INITIAL_PACKAGES= initial packages you want installed for your system. The provided list is just my opinion of what is essential. Opinions will vary. They are `git python3-pip zip dos2unix` Depending on the Pi image you use, some of these packages may already be installed.
    5. GIT_EMAIL= The email address for your git activity
    6. GIT_NAME= Your name for git activity
-   7. GMAIL settings are only needed if you want to install gmail support
-   8. GMAIL= your gmail email address
-   9. GMAIL_AUTH= the authorization string you got from google for applications to use your account. Refer to https://myaccount.google.com/permissions
+   7. EXTRA_SCRIPT= The name of an additional script file you want to run as part of setup. I use this to set unusual setting and add an entry to `~/.bash_alaiases`. Be sure to copy this fie to the image.
+   8. GMAIL settings are only needed if you want to install gmail support
+   9. GMAIL= your gmail email address
+   10. GMAIL_AUTH= the authorization string you got from google for applications to use your account. Refer to https://myaccount.google.com/permissions
 6. Eject the device from your machine
 7. Insert device in new Pi and apply power
 8. Determine address of new machine and connect using ssh or just try `ssh pi@raspberrypi` or `ssh pi@raspberrypi.local`. You can also connect directly using a keyboard and monitor.
@@ -58,5 +60,7 @@ When finished, remove these three files from /boot/ directory
 1.  options.txt or alternate file
 2.  initialize.sh
 3.  gmail-setup.sh
+
+Consider using a ssh key for access.
 
 **NOTE** A second script is needed to install gmail support as a reboot is needed when hostname is changed.

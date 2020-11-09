@@ -1,8 +1,15 @@
 #!/bin/bash
 #
-source /boot/options.txt
+SOURCE=$1
+[ -z $SOURCE ] && SOURCE=/boot/options.txt
+#
+# Cleanup up linefeeds in options file just in case
+#
+sudo sed -i 's/^M$//' $SOURCE
+echo "Options from $SOURCE"
+source $SOURCE
 echo "Installing and initializing mailer"
-sudo apt install -y exim4-daemon-light mailutils
+sudo apt install -yqq exim4-daemon-light mailutils
 sudo touch /var/mail/$USER
 sudo chown $USER:mail /var/mail/$USER
 sudo chmod 660 /var/mail/$USER

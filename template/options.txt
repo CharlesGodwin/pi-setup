@@ -8,3 +8,4 @@ GIT_NAME=
 # the following are optional;
 GMAIL=
 GMAIL_AUTH=
+EXTRA_SCRIPT=
