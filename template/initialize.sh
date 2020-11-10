@@ -26,18 +26,11 @@ sudo apt install -yqq $INITIAL_PACKAGES
 sudo apt autoremove -yqq
 echo "Installing base python3 modules"
 sudo pip3 -q install $PYTHON_MODULES
-git config --global credential.helper store
-git config --global user.email $GIT_EMAIL
-git config --global user.name "$GIT_NAME"
 echo "Creating directories"
 mkdir ~/bin
 mkdir ~/.ssh
 sudo rm -Rf /boot/'System Volume Information'
-if [ -f "$EXTRA_SCRIPT" ]
-then
-  echo "Running extra script $EXTRA_SCRIPT"
-  bash $EXTRA_SCRIPT
-fi
+post_install
 read -p "Initialization complete on $HOSTNAME, press any key to reboot"
 sudo raspi-config nonint do_hostname $HOSTNAME
 sudo reboot

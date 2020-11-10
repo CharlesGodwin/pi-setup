@@ -9,3 +9,6 @@ GIT_NAME=
 GMAIL=
 GMAIL_AUTH=
 EXTRA_SCRIPT=
+post_install () {
+    # add post install bash code
+}
