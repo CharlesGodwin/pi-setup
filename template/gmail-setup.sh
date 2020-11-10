@@ -2,18 +2,14 @@
 #
 SOURCE=$1
 [ -z $SOURCE ] && SOURCE=/boot/options.txt
-#
-# Cleanup up linefeeds in options file just in case
-#
-sudo sed -i 's/^M$//' $SOURCE
 echo "Options from $SOURCE"
 source $SOURCE
 echo "Installing and initializing mailer"
-sudo apt install -yqq exim4-daemon-light mailutils
+sudo apt install -y -qq exim4-daemon-light mailutils
 sudo touch /var/mail/$USER
 sudo chown $USER:mail /var/mail/$USER
 sudo chmod 660 /var/mail/$USER
-cat <<INLINE | sudo tee /etc/exim4/update-exim4.conf.conf
+cat > /tmp/gmailsetup.tmp <<INLINE
 # /etc/exim4/update-exim4.conf.conf
 #
 # Edit this file and /etc/mailname by hand and execute update-exim4.conf
@@ -46,17 +42,21 @@ dc_hide_mailname='false'
 dc_mailname_in_oh='true'
 dc_localdelivery='mail_spool'
 INLINE
-sudo echo "root: $USER" | sudo tee -a /etc/aliases
-cat <<INLINE | sudo tee -a /etc/exim4/passwd.client
+sudo cat /tmp/gmailsetup.tmp > /etc/exim4/update-exim4.conf.conf
+sudo echo "root: $USER" >> /etc/aliases
+cat > /tmp/gmailsetup2.tmp <<INLINE
 gmail-smtp.l.google.com:$GMAIL:$GMAIL_AUTH
 *.google.com:$GMAIL:$GMAIL_AUTH
 smtp.gmail.com:$GMAIL:$GMAIL_AUTH
 INLINE
+sudo cat /tmp/gmailsetup2.txp >> | sudo tee -a /etc/exim4/passwd.client
 echo "restarting exim"
 sudo update-exim4.conf
 sudo systemctl restart exim4
 echo "$GMAIL">> ~/.forward
 echo "Testing email system"
-echo "This is a test email from $HOSTNAME @ `hostname -I`"|mail -s "Test email from $HOSTNAME" $GMAIL
+echo "This is a test email from $USER @ $HOSTNAME IP info `hostname -I`"|mail -s "Test email from $HOSTNAME" $GMAIL
+echo "Output of email error log"
+cat /var/log/exim4/mainlog
 sudo exim -qff
-echo "Setup complete"
+echo "Gmail setup complete"

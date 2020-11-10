@@ -20,12 +20,12 @@ echo "set timezone $TIMEZONE"
 sudo timedatectl set-timezone "$TIMEZONE"
 echo "Updating software"
 sudo apt update -qq
-sudo apt upgrade -yqq
+sudo apt upgrade -y -qq
 echo "Installing initial packages"
-sudo apt install -yqq $INITIAL_PACKAGES
+[ -z $INITIAL_PACKAGES ] || sudo apt install -yqq $INITIAL_PACKAGES
 sudo apt autoremove -yqq
 echo "Installing base python3 modules"
-sudo pip3 -q install $PYTHON_MODULES
+[ -z $PYTHON_MODULES ] || sudo pip3 -q install $PYTHON_MODULES
 echo "Creating directories"
 mkdir ~/bin
 mkdir ~/.ssh
