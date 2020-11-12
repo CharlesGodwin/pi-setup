@@ -5,6 +5,7 @@ SOURCE=$1
 echo "Options from $SOURCE"
 source $SOURCE
 echo "Installing and initializing mailer"
+export DEBIAN_FRONTEND=noninteractive
 sudo apt install -y -qq exim4-daemon-light mailutils
 sudo touch /var/mail/$USER
 sudo chown $USER:mail /var/mail/$USER
@@ -42,21 +43,24 @@ dc_hide_mailname='false'
 dc_mailname_in_oh='true'
 dc_localdelivery='mail_spool'
 INLINE
-sudo cat /tmp/gmailsetup.tmp > /etc/exim4/update-exim4.conf.conf
-sudo echo "root: $USER" >> /etc/aliases
+# elevate
+sudo su
+cat /tmp/gmailsetup.tmp > /etc/exim4/update-exim4.conf.conf
+echo "root: $USER" >> /etc/aliases
 cat > /tmp/gmailsetup2.tmp <<INLINE
 gmail-smtp.l.google.com:$GMAIL:$GMAIL_AUTH
 *.google.com:$GMAIL:$GMAIL_AUTH
 smtp.gmail.com:$GMAIL:$GMAIL_AUTH
 INLINE
-sudo cat /tmp/gmailsetup2.txp >> | sudo tee -a /etc/exim4/passwd.client
+cat /tmp/gmailsetup2.tmp >> /etc/exim4/passwd.client
 echo "restarting exim"
-sudo update-exim4.conf
-sudo systemctl restart exim4
+update-exim4.conf
+systemctl restart exim4
 echo "$GMAIL">> ~/.forward
 echo "Testing email system"
 echo "This is a test email from $USER @ $HOSTNAME IP info `hostname -I`"|mail -s "Test email from $HOSTNAME" $GMAIL
 echo "Output of email error log"
 cat /var/log/exim4/mainlog
-sudo exim -qff
+exim -qff
 echo "Gmail setup complete"
+exit

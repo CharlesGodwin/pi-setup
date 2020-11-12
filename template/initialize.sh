@@ -19,19 +19,20 @@ sudo locale-gen
 echo "set timezone $TIMEZONE"
 sudo timedatectl set-timezone "$TIMEZONE"
 echo "Updating software"
+export DEBIAN_FRONTEND=noninteractive
 sudo apt update -qq
 sudo apt upgrade -y -qq
 echo "Installing initial packages"
-[ ! -z $PYTHON_MODULES ] && INITIAL_PACKAGES="python3-pip $INITIAL_PACKAGES"
-[ ! -z $INITIAL_PACKAGES ] && sudo apt install -yqq $INITIAL_PACKAGES
-sudo apt autoremove -yqq
+[ ! -z "$PYTHON_MODULES" ] && INITIAL_PACKAGES="python3-pip $INITIAL_PACKAGES"
+[ ! -z "$INITIAL_PACKAGES" ] && sudo apt install -yqq $INITIAL_PACKAGES
+sudo apt autoremove -y -qq
 echo "Installing base python3 modules"
-[ ! -z $PYTHON_MODULES ] &&sudo pip3 -q install $PYTHON_MODULES
+[ ! -z "$PYTHON_MODULES" ] &&sudo pip3 -q install $PYTHON_MODULES
 echo "Creating directories"
 mkdir ~/bin
 mkdir ~/.ssh
 sudo rm -Rf /boot/'System Volume Information'
 post_install
-read -p "Initialization complete on $HOSTNAME, press any key to reboot"
 sudo raspi-config nonint do_hostname $HOSTNAME
+read -p "Initialization complete on $HOSTNAME, press any key to reboot"
 sudo reboot
