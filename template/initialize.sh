@@ -23,7 +23,7 @@ export DEBIAN_FRONTEND=noninteractive
 sudo apt update -qq
 sudo apt upgrade -y -qq
 echo "Installing initial packages"
-[ ! -z "$PYTHON_MODULES" ] && INITIAL_PACKAGES="python3-pip $INITIAL_PACKAGES"
+[ ! -z "$PYTHON_MODULES" ] && INITIAL_PACKAGES="python3 python3-pip $INITIAL_PACKAGES"
 [ ! -z "$INITIAL_PACKAGES" ] && sudo apt install -yqq $INITIAL_PACKAGES
 sudo apt autoremove -y -qq
 echo "Installing base python3 modules"
@@ -33,6 +33,7 @@ mkdir ~/bin
 mkdir ~/.ssh
 sudo rm -Rf /boot/'System Volume Information'
 post_install
+[[ ( ! -z $GMAIL_AUTH && ! -z $GMAIL ) ]] && echo "Be sure to run this next /boot/gmail-setup.sh $SOURCE"
 sudo raspi-config nonint do_hostname $HOSTNAME
 read -p "Initialization complete on $HOSTNAME, press any key to reboot"
 sudo reboot

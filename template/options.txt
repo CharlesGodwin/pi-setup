@@ -1,14 +1,11 @@
 HOSTNAME=
 LOCALE="en_US.UTF-8"
 TIMEZONE=
-INITIAL_PACKAGES="git python3-pip zip"
+INITIAL_PACKAGES="python3 python3-pip zip"
 PYTHON_MODULES=
-GIT_EMAIL=
-GIT_NAME=
-# the following are optional;
+post_install () {
+    # add post install bash code see README.md
+}
+# the following are optional
 GMAIL=
 GMAIL_AUTH=
-EXTRA_SCRIPT=
-post_install () {
-    # add post install bash code
-}

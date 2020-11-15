@@ -2,6 +2,11 @@
 #
 SOURCE=$1
 [ -z $SOURCE ] && SOURCE=/boot/options.txt
+if [[ ( -z $GMAIL_AUTH || ! -z $GMAIL ) ]]
+then
+    echo "Gmail options not provided"
+    exit 1
+fi
 echo "Options from $SOURCE"
 source $SOURCE
 echo "Installing and initializing mailer"
@@ -43,24 +48,23 @@ dc_hide_mailname='false'
 dc_mailname_in_oh='true'
 dc_localdelivery='mail_spool'
 INLINE
-# elevate
-sudo su
-cat /tmp/gmailsetup.tmp > /etc/exim4/update-exim4.conf.conf
-echo "root: $USER" >> /etc/aliases
 cat > /tmp/gmailsetup2.tmp <<INLINE
 gmail-smtp.l.google.com:$GMAIL:$GMAIL_AUTH
 *.google.com:$GMAIL:$GMAIL_AUTH
 smtp.gmail.com:$GMAIL:$GMAIL_AUTH
 INLINE
-cat /tmp/gmailsetup2.tmp >> /etc/exim4/passwd.client
+sudo cp /tmp/gmailsetup.tmp /etc/exim4/update-exim4.conf.conf
+echo "root: $USER" | sudo tee -a /etc/aliases
+cat /tmp/gmailsetup2.tmp | sudo tee -a  /etc/exim4/passwd.client
 echo "restarting exim"
-update-exim4.conf
-systemctl restart exim4
+sudo update-exim4.conf
+sudo systemctl restart exim4
 echo "$GMAIL">> ~/.forward
 echo "Testing email system"
 echo "This is a test email from $USER @ $HOSTNAME IP info `hostname -I`"|mail -s "Test email from $HOSTNAME" $GMAIL
+sudo exim -qff
 echo "Output of email error log"
 cat /var/log/exim4/mainlog
-exim -qff
+# Update mail notice for autoupdate
+[ -f /etc/apt/apt.conf.d/50unattended-upgrades ] && sudo sed -i "s#//Unattended-Upgrade::Mail \"\";#Unattended-Upgrade::Mail \"$GMAIL\";#g"
 echo "Gmail setup complete"
-exit
