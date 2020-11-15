@@ -8,7 +8,10 @@ This project consists of initialization scripts and support files to allow for a
 
 I prefer this type of install instead of keeping a duplicate image of an existing system. Those images grow out of date and take a lot of disk storage on my PC.
 
-This provides an optional second step to set up use of Google gmail as the outbound email handler. If you use something else, or don't want mail support,  don't run the second step.
+This provides an optional second step to set up use of Google gmail as the outbound email handler. If you use something else, or don't want mail support, don't run the second step.
+
+This has been provided as a template so you can create your own repository just by clicking on the `Use this template`  Refer to https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template
+
 
 The files will do the following:
 
@@ -34,9 +37,8 @@ Follow these steps to a simple new image. I say simple, but it is not quick, as 
 
 1. Create a Pi boot image on SD, USB or SSD using your favourite imager. I use the Raspberry Pi Imager https://www.raspberrypi.org/downloads/
 2. After creation, remount the image in your machine
-3. Copy the contents of the templates directory to the boot directory on the image
 4. __In the boot directory,__ edit `wpa_supplicant.conf` file for your country code, SSID and WiFi password
-5. __In the boot directory,__ edit `options.txt` file or rename it to another name.  There are many values:
+5. __In the boot directory,__ edit `options.txt` file.  There are many values:
    1. HOSTNAME= The hostname you want for your new Pi system. It must be unique in your network
    2. LOCALE= The locale for your location. Default is `en_US.UTF-8` To find out what you have used before, log into a running Pi terminal and type `locale -a`
    3. TIMEZONE= timezone string for your location. refer to https://en.wikipedia.org/wiki/List_of_tz_database_time_zones To find out what you have used before log into a running Pi terminal and type `timedatectl status`
@@ -45,6 +47,7 @@ Follow these steps to a simple new image. I say simple, but it is not quick, as 
    6. GMAIL settings are only needed if you want to install gmail support
       1. GMAIL= your gmail email address
       2. GMAIL_AUTH= the authorization string you got from google for applications to use your account. Refer to https://myaccount.google.com/permissions
+3. Copy the contents of the boot directory to the /boot directory on the image.
 6. Eject the device from your machine
 7. Insert device in new Pi and apply power
 8. Determine address of new machine and connect using ssh or just try `ssh pi@raspberrypi` or `ssh pi@raspberrypi.local`. You can also connect directly using a keyboard and monitor.
@@ -69,7 +72,7 @@ Consider using a ssh key for access.
 <pre>
 pi-setup
 ├── README.md
-└── template
+└── boot
     ├── gmail-setup.sh
     ├── initialize.sh
     ├── options.txt
