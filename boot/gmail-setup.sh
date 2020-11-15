@@ -1,14 +1,12 @@
 #!/bin/bash
 #
-SOURCE=$1
-[ -z $SOURCE ] && SOURCE=/boot/options.txt
+GMAIL=
+GMAIL_AUTH=
 if [[ ( -z $GMAIL_AUTH || ! -z $GMAIL ) ]]
 then
     echo "Gmail options not provided"
     exit 1
 fi
-echo "Options from $SOURCE"
-source $SOURCE
 echo "Installing and initializing mailer"
 export DEBIAN_FRONTEND=noninteractive
 sudo apt install -y -qq exim4-daemon-light mailutils
