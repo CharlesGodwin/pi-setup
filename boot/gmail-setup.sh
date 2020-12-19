@@ -2,7 +2,7 @@
 #
 GMAIL=
 GMAIL_AUTH=
-if [[ ( -z $GMAIL_AUTH || ! -z $GMAIL ) ]]
+if [[ ( -z $GMAIL_AUTH || -z $GMAIL ) ]]
 then
     echo "Gmail options not provided"
     exit 1
@@ -63,6 +63,4 @@ echo "This is a test email from $USER @ $HOSTNAME IP info `hostname -I`"|mail -s
 sudo exim -qff
 echo "Output of email error log"
 cat /var/log/exim4/mainlog
-# Update mail notice for autoupdate
-[ -f /etc/apt/apt.conf.d/50unattended-upgrades ] && sudo sed -i "s#//Unattended-Upgrade::Mail \"\";#Unattended-Upgrade::Mail \"$GMAIL\";#g"
 echo "Gmail setup complete"
