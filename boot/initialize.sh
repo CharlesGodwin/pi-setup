@@ -31,14 +31,14 @@ echo "Installing initial packages"
 [ -z "$PYTHON_MODULES" ] || INITIAL_PACKAGES="python3 python3-pip $INITIAL_PACKAGES"
 [ -z "$INITIAL_PACKAGES" ] || sudo apt install -yqq $INITIAL_PACKAGES
 sudo apt autoremove -y -qq
-if [ -z "$PYTHON_MODULES" ]; then
+if [ ! -z "$PYTHON_MODULES" ]; then
     echo "Installing python3 modules $PYTHON_MODULES"
     sudo pip3 -q install $PYTHON_MODULES
 fi
 echo "Creating directories"
-mkdir ~/bin
-mkdir ~/.ssh
-sudo rm -Rf /boot/'System Volume Information'
+[ -d ~/bin ] || mkdir ~/bin
+[ -d ~/.ssh ] || mkdir ~/.ssh
+[ -d /boot/'System Volume Information' ] && sudo rm -Rf /boot/'System Volume Information'
 post_install
 [ -f /boot/gmail-setup.sh ] && echo "Be sure to immediately run '/boot/gmail-setup.sh' for mail suport"
 if [ -z "$NEW_HOSTNAME" ]; then
