@@ -5,9 +5,9 @@ __Set up Pi__
 This has been written for a Windows audience but users of Mac or Linux machines should be able use these instructions with minimal modification.
 This assumes:
 
-- You are comfortable using bash terminal on a Raspberry Pi
+- You are comfortable using ssh/bash terminal on a Raspberry Pi
 - You know how to build a Raspberry Pi boot image
-- If you chose to use GMAIL mail support you know how to get an authorization key from Google.
+- If you choose to use GMAIL mail support you know how to get an authorization key from Google.
 
 I have been configuring a lot of Pi images and every time I create a new image I do the same things, over and over again. This became tiresome and error prone.
 
@@ -25,10 +25,10 @@ The scripts will do the following:
 1. Cause the image to boot supporting ssh and log into your local WiFi connection.
 
 2. initialize.sh
-   1. force password change
-   2. set up locale
-   3. set up timezone
-   4. update software
+   1. Force password change
+   2. Set up locale
+   3. Set up timezone
+   4. Update software
    5. Installs initial packages if needed
    6. Installs initial python3 packages if needed
    7. Run any optional extra setup steps
@@ -37,8 +37,8 @@ The scripts will do the following:
       2.  Initializes exim4 mailer for gmail
       3.  Assign forwarding of emails for root and pi to gmail
       4.  Sends test email
-   9.  change hostname
-   10. reboot
+   9.  Change hostname
+   10. Reboot
 
 
 Follow these steps to a simple new image. I say simple, but it is not quick, as a lot of updates and installs take place.
@@ -50,23 +50,23 @@ Follow these steps to a simple new image. I say simple, but it is not quick, as 
    1. NEW_HOSTNAME= The hostname you want for your new Pi system. It must be unique in your network
    2. LOCALE= The locale for your location. Default is `en_US.UTF-8` To find out what you have used before, log into a running Pi terminal and type `locale -a`
    3. TIMEZONE= timezone string for your location. refer to https://en.wikipedia.org/wiki/List_of_tz_database_time_zones To find out what you have used before log into a running Pi terminal and type `timedatectl status`
-   4. INITIAL_PACKAGES= initial packages you want installed for your system. The provided list is just my opinion of what is essential. Opinions will vary. They are `python3-pip zip dos2unix` Depending on the Pi image you use, some of these packages may already be installed.
+   4. INITIAL_PACKAGES= initial packages you want installed for your system. The provided list is just my opinion of what is essential. Opinions will vary. They are `python3-pip zip dos2unix`. Depending on the Pi image you use, some of these packages may already be installed.
    5. post_install shell function. This function is called from initialize.sh at end of the setup and can contain any additional code you want to run as part of setup. I use this to set unusual settings and add an entry to `~/.bash_aliases`.
    6. If you want to install gmail support:
       1. GMAIL= your gmail email address
       2. GMAIL_AUTH= the authorization string you got from google for applications to use your account. Refer to https://myaccount.google.com/permissions
-5. Copy the contents of the `./boot` directory to the `/boot` directory on the image.
+5. Copy the contents of the `./boot` directory to the `boot` partition on the image.
 6. Eject the device from your machine
-7. Insert device in new Pi and apply power
+7. Insert device in a new Pi and apply power
 8. Determine address of new machine and connect using ssh or just try `ssh pi@raspberrypi` or `ssh pi@raspberrypi.local`. You can also connect directly using a keyboard and monitor.
-9. Once logged in, run `/boot/initialize.sh </boot/options.txt>` The options filename parameter is only necessary if you use a different name for your options.
-10. You will be prompted to change the default password
+9. Once logged in, run `/boot/initialize.sh </boot/options.sh>` The options filename parameter is only necessary if you use a different name for your options.
+10. You will be prompted to change the default password.
 11. Then wait as it updates the software - this can take a long time
 12. The machine will pause and reboot when finished
 
-When finished, you can, if you wish, remove these three files from /boot/ directory
-1.  options.sh or alternate file
-2.  initialize.sh
+When finished, you can, if you wish, remove these files from `/boot/` directory.
+1.  `options.sh` or alternate file
+2.  `initialize.sh`
 
 Consider using a ssh key for access. https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md
 
