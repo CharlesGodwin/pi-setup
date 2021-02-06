@@ -49,10 +49,11 @@ Follow these steps to a simple new image. I say simple, but it is not quick, as 
 4. __In the ./boot directory,__ edit `options.sh` file.  There are many values:
    1. NEW_HOSTNAME= The hostname you want for your new Pi system. It must be unique in your network
    2. LOCALE= The locale for your location. Default is `en_US.UTF-8` To find out what you have used before, log into a running Pi terminal and type `locale -a`
-   3. TIMEZONE= timezone string for your location. refer to https://en.wikipedia.org/wiki/List_of_tz_database_time_zones To find out what you have used before log into a running Pi terminal and type `timedatectl status`
-   4. INITIAL_PACKAGES= initial packages you want installed for your system. The provided list is just my opinion of what is essential. Opinions will vary. They are `python3-pip zip dos2unix`. Depending on the Pi image you use, some of these packages may already be installed.
-   5. post_install shell function. This function is called from initialize.sh at end of the setup and can contain any additional code you want to run as part of setup. I use this to set unusual settings and add an entry to `~/.bash_aliases`.
-   6. If you want to install gmail support:
+   3. KEYBOARD= Set to alternate keyboard. Default is 'uk', American is 'us'. refer to http://xfree86.org/current/XKBproto.pdf
+   4. TIMEZONE= timezone string for your location. refer to https://en.wikipedia.org/wiki/List_of_tz_database_time_zones To find out what you have used before log into a running Pi terminal and type `timedatectl status`
+   5. INITIAL_PACKAGES= initial packages you want installed for your system. The provided list is just my opinion of what is essential. Opinions will vary. They are `python3-pip zip dos2unix`. Depending on the Pi image you use, some of these packages may already be installed.
+   6. post_install shell function. This function is called from initialize.sh at end of the setup and can contain any additional code you want to run as part of setup. I use this to set unusual settings and add an entry to `~/.bash_aliases`.
+   7. If you want to install gmail support:
       1. GMAIL= your gmail email address
       2. GMAIL_AUTH= the authorization string you got from google for applications to use your account. Refer to https://myaccount.google.com/permissions
 5. Copy the contents of the `./boot` directory to the `boot` partition on the image.
