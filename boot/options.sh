@@ -10,6 +10,10 @@ LOCALE="en_US.UTF-8"
 TIMEZONE=UTC
 INITIAL_PACKAGES="python3 python3-pip zip"
 PYTHON_MODULES=
+# see http://xfree86.org/current/XKBproto.pdf
+# see /etc/default/keyboard
+# KEYBOARD=uk
+# KEYBOARD=us
 function post_install () {
     # add custom post install bash code see README.md
 }

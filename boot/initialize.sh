@@ -51,6 +51,10 @@ function update () {
         echo "set timezone $TIMEZONE"
         sudo timedatectl set-timezone "$TIMEZONE"
     fi
+    if [ ! -z "$KEYBOARD" ]; then
+        echo "set keyboard $KEYBOARD"
+        sudo sed -i "s|XKBLAYOUT=\"uk\"|XKBLAYOUT=\"$KEYBOARD\"|g" /etc/default/keyboard
+    fi
     echo "Updating software"
     export DEBIAN_FRONTEND=noninteractive
     sudo apt update -qq
