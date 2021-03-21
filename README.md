@@ -1,5 +1,7 @@
 __Set up Pi__
 
+__Version 1.0 is a deprectated/archived version that is more general purpose. Version 2.0 is revised to work with closely with version 1.7 and newer versions of the Raspberry Pi Imager.__
+
 **This is intended for experienced users who wants to streamline the initial setup of a Raspberry Pi.**
 
 **If you plan to use this with a Ubuntu image, please read the companion document ubuntu.md**
