@@ -10,6 +10,8 @@ LOCALE="en_US.UTF-8"
 TIMEZONE=UTC
 INITIAL_PACKAGES="python3 python3-pip zip"
 PYTHON_MODULES=
+# If set to yes the reboot will happen without a pause
+# AUTO_RESTART=yes
 # see http://xfree86.org/current/XKBproto.pdf
 # see /etc/default/keyboard
 # KEYBOARD=uk
